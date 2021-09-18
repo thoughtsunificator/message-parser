@@ -1,0 +1,27 @@
+{
+	"name": "@thoughtsunificator/message-parser",
+	"type": "module",
+	"main": "index.js",
+	"description": "Enables sorting and grouping of users and channel mentions in a message",
+	"version": "1.0.0",
+	"devDependencies": {
+		"docdash": "^1.2.0",
+		"eslint": "^7.28.0",
+		"jsdoc": "^3.6.6",
+		"nodeunit-esm": "^1.0.2"
+	},
+	"scripts": {
+		"test": "nodeunit-esm -r",
+		"generate-docs": "jsdoc --configure .jsdoc.json --verbose",
+		"lint": "eslint src/**/*.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/thoughtsunificator/message-parser.git"
+	},
+	"bugs": {
+		"url": "https://github.com/thoughtsunificator/message-parser/issues"
+	},
+	"author": "Romain Lebesle <oss@thoughtsunificator.me> (https://thoughtsunificator.me)",
+	"license": "MIT"
+}
