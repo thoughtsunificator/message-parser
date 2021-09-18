@@ -3,7 +3,7 @@
 	"type": "module",
 	"main": "index.js",
 	"description": "Enables sorting and grouping of users and channel mentions in a message",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"devDependencies": {
 		"docdash": "^1.2.0",
 		"eslint": "^7.28.0",
