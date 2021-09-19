@@ -1,23 +1,24 @@
+import assert from "assert"
 import Token from "../src/token.js"
 
-export function type(test) {
-	test.expect(3)
-	test.strictEqual(Token.TYPE.TEXT, "TEXT")
-	test.strictEqual(Token.TYPE.CHANNEL, "CHANNEL")
-	test.strictEqual(Token.TYPE.USER, "USER")
-	test.done()
-}
+describe("token", () => {
 
-export function instance(test) {
-	const token = new Token(Token.TYPE.TEXT, "cxz", 11)
-	test.expect(4)
-	test.strictEqual(token.type, Token.TYPE.TEXT)
-	test.strictEqual(token.buffer, "cxz")
-	test.strictEqual(token.bufferIndex, 11)
-	test.throws(() => {
-		token.type = ""
-		token.buffer = ""
-		token.bufferIndex = ""
+	it("type", () => {
+		assert.strictEqual(Token.TYPE.TEXT, "TEXT")
+		assert.strictEqual(Token.TYPE.CHANNEL, "CHANNEL")
+		assert.strictEqual(Token.TYPE.USER, "USER")
 	})
-	test.done()
-}
+
+	it("instance", () => {
+		const token = new Token(Token.TYPE.TEXT, "cxz", 11)
+		assert.strictEqual(token.type, Token.TYPE.TEXT)
+		assert.strictEqual(token.buffer, "cxz")
+		assert.strictEqual(token.bufferIndex, 11)
+		assert.throws(() => {
+			token.type = ""
+			token.buffer = ""
+			token.bufferIndex = ""
+		})
+	})
+
+})

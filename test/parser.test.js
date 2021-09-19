@@ -1,98 +1,101 @@
+import assert from "assert"
 import Parser from "../src/parser.js"
 
-export function parse(test) {
-	test.expect(50)
+describe("parser", () => {
 
-	const message = Parser.parse("@dsadsadas dsadsa")
+	it("parse", () => {
 
-	test.strictEqual(message.fragments[0].type, "USER")
-	test.strictEqual(message.fragments[0].content, "@dsadsadas")
+		const message = Parser.parse("@dsadsadas dsadsa")
 
-	test.strictEqual(message.fragments[1].type, "TEXT")
-	test.strictEqual(message.fragments[1].content, " dsadsa")
+		assert.strictEqual(message.fragments[0].type, "USER")
+		assert.strictEqual(message.fragments[0].content, "@dsadsadas")
 
-	test.deepEqual(message.users, ["dsadsadas"])
-	test.deepEqual(message.channels, [])
+		assert.strictEqual(message.fragments[1].type, "TEXT")
+		assert.strictEqual(message.fragments[1].content, " dsadsa")
 
-	const message_ = Parser.parse("#dsadsadas dsadsa")
+		assert.deepEqual(message.users, ["dsadsadas"])
+		assert.deepEqual(message.channels, [])
 
-	test.strictEqual(message_.fragments[0].type, "CHANNEL")
-	test.strictEqual(message_.fragments[0].content, "#dsadsadas")
+		const message_ = Parser.parse("#dsadsadas dsadsa")
 
-	test.strictEqual(message_.fragments[1].type, "TEXT")
-	test.strictEqual(message_.fragments[1].content, " dsadsa")
+		assert.strictEqual(message_.fragments[0].type, "CHANNEL")
+		assert.strictEqual(message_.fragments[0].content, "#dsadsadas")
 
-	test.deepEqual(message_.channels, ["dsadsadas"])
-	test.deepEqual(message_.users, [])
+		assert.strictEqual(message_.fragments[1].type, "TEXT")
+		assert.strictEqual(message_.fragments[1].content, " dsadsa")
 
-	const message__ = Parser.parse("@dsadsads #dsadsa @d #d")
+		assert.deepEqual(message_.channels, ["dsadsadas"])
+		assert.deepEqual(message_.users, [])
 
-	test.strictEqual(message__.fragments[0].type, "USER")
-	test.strictEqual(message__.fragments[0].content, "@dsadsads")
+		const message__ = Parser.parse("@dsadsads #dsadsa @d #d")
 
-	test.strictEqual(message__.fragments[1].type, "TEXT")
-	test.strictEqual(message__.fragments[1].content, " ")
+		assert.strictEqual(message__.fragments[0].type, "USER")
+		assert.strictEqual(message__.fragments[0].content, "@dsadsads")
 
-	test.strictEqual(message__.fragments[2].type, "CHANNEL")
-	test.strictEqual(message__.fragments[2].content, "#dsadsa")
+		assert.strictEqual(message__.fragments[1].type, "TEXT")
+		assert.strictEqual(message__.fragments[1].content, " ")
 
-	test.strictEqual(message__.fragments[3].type, "TEXT")
-	test.strictEqual(message__.fragments[3].content, " ")
+		assert.strictEqual(message__.fragments[2].type, "CHANNEL")
+		assert.strictEqual(message__.fragments[2].content, "#dsadsa")
 
-	test.strictEqual(message__.fragments[4].type, "USER")
-	test.strictEqual(message__.fragments[4].content, "@d")
+		assert.strictEqual(message__.fragments[3].type, "TEXT")
+		assert.strictEqual(message__.fragments[3].content, " ")
 
-	test.strictEqual(message__.fragments[5].type, "TEXT")
-	test.strictEqual(message__.fragments[5].content, " ")
+		assert.strictEqual(message__.fragments[4].type, "USER")
+		assert.strictEqual(message__.fragments[4].content, "@d")
 
-	test.strictEqual(message__.fragments[6].type, "CHANNEL")
-	test.strictEqual(message__.fragments[6].content, "#d")
+		assert.strictEqual(message__.fragments[5].type, "TEXT")
+		assert.strictEqual(message__.fragments[5].content, " ")
 
-	test.deepEqual(message__.channels, ["dsadsa", "d"])
-	test.deepEqual(message__.users, ["dsadsads", "d"])
+		assert.strictEqual(message__.fragments[6].type, "CHANNEL")
+		assert.strictEqual(message__.fragments[6].content, "#d")
 
-	const message___ = Parser.parse("dsadsa #dsadsadas dsadsa")
+		assert.deepEqual(message__.channels, ["dsadsa", "d"])
+		assert.deepEqual(message__.users, ["dsadsads", "d"])
 
-	test.strictEqual(message___.fragments[0].type, "TEXT")
-	test.strictEqual(message___.fragments[0].content, "dsadsa ")
+		const message___ = Parser.parse("dsadsa #dsadsadas dsadsa")
 
-	test.strictEqual(message___.fragments[1].type, "CHANNEL")
-	test.strictEqual(message___.fragments[1].content, "#dsadsadas")
+		assert.strictEqual(message___.fragments[0].type, "TEXT")
+		assert.strictEqual(message___.fragments[0].content, "dsadsa ")
 
-	test.strictEqual(message___.fragments[2].type, "TEXT")
-	test.strictEqual(message___.fragments[2].content, " dsadsa")
+		assert.strictEqual(message___.fragments[1].type, "CHANNEL")
+		assert.strictEqual(message___.fragments[1].content, "#dsadsadas")
 
-	test.deepEqual(message___.channels, ["dsadsadas"])
-	test.deepEqual(message___.users, [])
+		assert.strictEqual(message___.fragments[2].type, "TEXT")
+		assert.strictEqual(message___.fragments[2].content, " dsadsa")
+
+		assert.deepEqual(message___.channels, ["dsadsadas"])
+		assert.deepEqual(message___.users, [])
 
 
-	const message____ = Parser.parse(`dsadsa #dsadsadas
+		const message____ = Parser.parse(`dsadsa #dsadsadas
 		dsadsa
 		#dsads`)
 
-	test.strictEqual(message____.fragments[0].type, "TEXT")
-	test.strictEqual(message____.fragments[0].content, "dsadsa ")
+		assert.strictEqual(message____.fragments[0].type, "TEXT")
+		assert.strictEqual(message____.fragments[0].content, "dsadsa ")
 
-	test.strictEqual(message____.fragments[1].type, "CHANNEL")
-	test.strictEqual(message____.fragments[1].content, "#dsadsadas")
+		assert.strictEqual(message____.fragments[1].type, "CHANNEL")
+		assert.strictEqual(message____.fragments[1].content, "#dsadsadas")
 
-	test.strictEqual(message____.fragments[2].type, "TEXT")
-	test.strictEqual(message____.fragments[2].content, "\n\t\tdsadsa\n\t\t")
+		assert.strictEqual(message____.fragments[2].type, "TEXT")
+		assert.strictEqual(message____.fragments[2].content, "\n\t\tdsadsa\n\t\t")
 
-	test.strictEqual(message____.fragments[3].type, "CHANNEL")
-	test.strictEqual(message____.fragments[3].content, "#dsads")
+		assert.strictEqual(message____.fragments[3].type, "CHANNEL")
+		assert.strictEqual(message____.fragments[3].content, "#dsads")
 
-	test.deepEqual(message____.channels, ["dsadsadas", "dsads"])
-	test.deepEqual(message____.users, [])
+		assert.deepEqual(message____.channels, ["dsadsadas", "dsads"])
+		assert.deepEqual(message____.users, [])
 
 
-	const message_____ = Parser.parse(`@dsadsa#dsads`)
+		const message_____ = Parser.parse(`@dsadsa#dsads`)
 
-	test.strictEqual(message_____.fragments[0].type, "TEXT")
-	test.strictEqual(message_____.fragments[0].content, "@dsadsa#dsads")
+		assert.strictEqual(message_____.fragments[0].type, "TEXT")
+		assert.strictEqual(message_____.fragments[0].content, "@dsadsa#dsads")
 
-	test.deepEqual(message_____.channels, [])
-	test.deepEqual(message_____.users, [])
+		assert.deepEqual(message_____.channels, [])
+		assert.deepEqual(message_____.users, [])
 
-	test.done()
-}
+	})
+
+})

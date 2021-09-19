@@ -1,15 +1,18 @@
+import assert from "assert"
 import { Message } from "../index.js"
 
-export function instance(test) {
-	const token = new Message()
-	test.expect(4)
-	test.deepEqual(token.fragments, [])
-	test.deepEqual(token.users, [])
-	test.deepEqual(token.channels, [])
-	test.throws(() => {
-		token.users = ""
-		token.fragments = ""
-		token.channels = ""
+describe("message", () => {
+
+	it("instance", () => {
+		const token = new Message()
+		assert.deepEqual(token.fragments, [])
+		assert.deepEqual(token.users, [])
+		assert.deepEqual(token.channels, [])
+		assert.throws(() => {
+			token.users = ""
+			token.fragments = ""
+			token.channels = ""
+		})
 	})
-	test.done()
-}
+
+})

@@ -1,13 +1,16 @@
+import assert from "assert"
 import { Fragment } from "../../index.js"
 
-export function instance(test) {
-	const token = new Fragment("text", "cxz")
-	test.expect(3)
-	test.strictEqual(token.type, "text")
-	test.strictEqual(token.content, "cxz")
-	test.throws(() => {
-		token.type = ""
-		token.content = ""
+describe("fragment", () => {
+
+	it("instance", () => {
+		const token = new Fragment("text", "cxz")
+		assert.strictEqual(token.type, "text")
+		assert.strictEqual(token.content, "cxz")
+		assert.throws(() => {
+			token.type = ""
+			token.content = ""
+		})
 	})
-	test.done()
-}
+
+})
