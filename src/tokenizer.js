@@ -55,7 +55,7 @@ class Tokenizer {
 				&& (!lastToken || Tokenizer.SEPARATOR_CHARACTERS.includes(lastToken.buffer.slice(-1)))) {
 				tokens.push(new Token(Token.TYPE.USER, buffer, index - buffer.length + 1))
 				buffer = ""
-			} else if(!Tokenizer.USER_ALLOWED_CHARACTERS.includes(nextCharacter) && !Tokenizer.CHANNEL_ALLOWED_CHARACTERS.includes(nextCharacter)) {
+			} else if(nextCharacter === null || (!Tokenizer.USER_ALLOWED_CHARACTERS.includes(nextCharacter.toLowerCase()) && !Tokenizer.CHANNEL_ALLOWED_CHARACTERS.includes(nextCharacter.toLowerCase()))) {
 				if(lastToken && lastToken.type === Token.TYPE.TEXT) {
 					let newBuffer = tokens[tokens.length - 1].buffer + buffer
 					let bufferIndex = index - buffer.length - tokens[tokens.length - 1].buffer.length + 1

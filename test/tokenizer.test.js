@@ -95,6 +95,36 @@ describe("tokenize", () => {
 		assert.strictEqual(tokens_____[0].buffer, "@dsadsa#dsads")
 		assert.strictEqual(tokens_____[0].bufferIndex, 0)
 
+		const tokens______ = Tokenizer.tokenize(`#fFSFSD #dsadsaDas #dFsads @dsaFGDSG`)
+
+		assert.strictEqual(tokens______[0].type, "CHANNEL")
+		assert.strictEqual(tokens______[0].buffer, "#fFSFSD")
+		assert.strictEqual(tokens______[0].bufferIndex, 0)
+
+		assert.strictEqual(tokens______[1].type, "TEXT")
+		assert.strictEqual(tokens______[1].buffer, " ")
+		assert.strictEqual(tokens______[1].bufferIndex, 7)
+
+		assert.strictEqual(tokens______[2].type, "CHANNEL")
+		assert.strictEqual(tokens______[2].buffer, "#dsadsaDas")
+		assert.strictEqual(tokens______[2].bufferIndex, 8)
+
+		assert.strictEqual(tokens______[3].type, "TEXT")
+		assert.strictEqual(tokens______[3].buffer, " ")
+		assert.strictEqual(tokens______[3].bufferIndex, 18)
+
+		assert.strictEqual(tokens______[4].type, "CHANNEL")
+		assert.strictEqual(tokens______[4].buffer, "#dFsads")
+		assert.strictEqual(tokens______[4].bufferIndex, 19)
+
+		assert.strictEqual(tokens______[5].type, "TEXT")
+		assert.strictEqual(tokens______[5].buffer, " ")
+		assert.strictEqual(tokens______[5].bufferIndex, 26)
+
+		assert.strictEqual(tokens______[6].type, "USER")
+		assert.strictEqual(tokens______[6].buffer, "@dsaFGDSG")
+		assert.strictEqual(tokens______[6].bufferIndex, 27)
+
 	})
 
 })

@@ -96,6 +96,33 @@ describe("parser", () => {
 		assert.deepEqual(message_____.channels, [])
 		assert.deepEqual(message_____.users, [])
 
+
+		const message______ = Parser.parse(`#fFSFSD #dsadsaDas #dFsads @dsaFGDSG`)
+
+		assert.strictEqual(message______.fragments[0].type, "CHANNEL")
+		assert.strictEqual(message______.fragments[0].content, "#fFSFSD")
+
+		assert.strictEqual(message______.fragments[1].type, "TEXT")
+		assert.strictEqual(message______.fragments[1].content, " ")
+
+		assert.strictEqual(message______.fragments[2].type, "CHANNEL")
+		assert.strictEqual(message______.fragments[2].content, "#dsadsaDas")
+
+		assert.strictEqual(message______.fragments[3].type, "TEXT")
+		assert.strictEqual(message______.fragments[3].content, " ")
+
+		assert.strictEqual(message______.fragments[4].type, "CHANNEL")
+		assert.strictEqual(message______.fragments[4].content, "#dFsads")
+
+		assert.strictEqual(message______.fragments[5].type, "TEXT")
+		assert.strictEqual(message______.fragments[5].content, " ")
+
+		assert.strictEqual(message______.fragments[6].type, "USER")
+		assert.strictEqual(message______.fragments[6].content, "@dsaFGDSG")
+
+		assert.deepEqual(message______.channels, ["fFSFSD", "dsadsaDas", "dFsads"])
+		assert.deepEqual(message______.users, ["dsaFGDSG"])
+
 	})
 
 })
